@@ -5,10 +5,10 @@ import Notification from "./components/Notification";
 import Footer from "./components/Footer";
 
 const App = () => {
-  const [notes, setNotes] = useState(null);
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("some error happened...");
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
@@ -34,6 +34,7 @@ const App = () => {
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
         );
+        console.log(error);
         setTimeout(() => {
           setErrorMessage(null);
         }, 5000);
